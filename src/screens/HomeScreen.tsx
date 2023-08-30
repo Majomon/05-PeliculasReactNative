@@ -1,5 +1,12 @@
 import React from 'react';
-import {ActivityIndicator, Dimensions, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  View,
+  FlatList,
+  Text,
+  ScrollView,
+} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import MoviePoster from '../components/MoviePoster';
 import {useMovies} from '../hooks/useMovies';
@@ -18,18 +25,34 @@ const HomeScreen = () => {
   }
 
   return (
-    <View
-      style={{justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
-      {/*  <MoviePoster movie={moviesInCinema[2]} /> */}
-      <View style={{height: 440}}>
-        <Carousel
-          data={moviesInCinema}
-          renderItem={({item}: any) => <MoviePoster movie={item} />}
-          sliderWidth={windowWidth}
-          itemWidth={300}
-        />
+    <ScrollView>
+      <View style={{marginTop: 20}}>
+        {/* Carousel principal */}
+        <View style={{height: 440}}>
+          <Carousel
+            data={moviesInCinema}
+            renderItem={({item}: any) => <MoviePoster movie={item} />}
+            sliderWidth={windowWidth}
+            itemWidth={300}
+          />
+        </View>
+        {/* Peliculas populares */}
+        <View style={{backgroundColor: 'red', height: 260}}>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>En cine</Text>
+          <FlatList
+            data={moviesInCinema}
+            renderItem={({item}: any) => (
+              <MoviePoster movie={item} width={140} height={200} />
+            )}
+            keyExtractor={item => item.id.toString()}
+            //Para el scroll hacia el costado
+            horizontal={true}
+            //Ocultar la barra de scroll
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -7,10 +7,12 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import {RootStackParams} from '../navigation/Navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useMovieDetails} from '../hooks/useMovieDetails';
+import MovieDetail from '../components/MovieDetail';
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {}
 
@@ -32,9 +34,11 @@ const DetailScreen = ({route}: Props) => {
         <Text style={styles.title}>{movie.title}</Text>
       </View>
 
-      <View style={styles.marginContainer}>
-        <Icon name="star-outline" color="grey" size={20} />
-      </View>
+      {isLoading ? (
+        <ActivityIndicator size={40} color="grey" style={{marginTop: 20}} />
+      ) : (
+        <MovieDetail movieFull={movieFull!} cast={cast} />
+      )}
     </ScrollView>
   );
 };

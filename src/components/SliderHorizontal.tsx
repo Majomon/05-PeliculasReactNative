@@ -9,7 +9,7 @@ interface Props {
 }
 const SliderHorizontal = ({title, movies}: Props) => {
   return (
-    <View style={{height: title ? 260 : 220}}>
+    <View style={{height: title ? 240 : 220}}>
       {title && (
         <Text
           style={{
@@ -24,7 +24,7 @@ const SliderHorizontal = ({title, movies}: Props) => {
       <FlatList
         data={movies}
         renderItem={({item}: any) => (
-          <MoviePoster movie={item} width={140} height={200} />
+          <MoviePoster movie={item} width={140} height={190} />
         )}
         keyExtractor={item => item.id.toString()}
         //Para el scroll hacia el costado

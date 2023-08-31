@@ -1,12 +1,14 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {MovieFull} from '../interface/movieInterface';
-import Icon from 'react-native-vector-icons/Ionicons';
 import currencyFormatter from 'currency-formatter';
+import {StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {Cast} from '../interface/creditsInterface';
+import {MovieFull} from '../interface/movieInterface';
+import CastCard from './CastCard';
 
 interface Props {
   movieFull: MovieFull;
-  cast: [];
+  cast: Cast[];
 }
 const MovieDetail = ({movieFull, cast}: Props) => {
   return (
@@ -30,6 +32,10 @@ const MovieDetail = ({movieFull, cast}: Props) => {
         </Text>
       </View>
       {/* Casting */}
+      <View style={{marginTop: 10, marginBottom: 100}}>
+        <Text style={styles.titleActores}>Actores</Text>
+        <CastCard actor={cast[0]} />
+      </View>
     </>
   );
 };
@@ -60,5 +66,12 @@ const styles = StyleSheet.create({
   presupuesto: {
     color: 'black',
     fontSize: 15,
+  },
+  titleActores: {
+    color: 'black',
+    fontSize: 20,
+    marginTop: 10,
+    fontWeight: 'bold',
+    marginHorizontal: 20,
   },
 });

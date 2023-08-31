@@ -16,10 +16,8 @@ export const useMovieDetails = (movieId: number) => {
   });
 
   const getMovieDetails = async () => {
-    const movieDetailsPromise = await movieDB.get<MovieFull>(`/${movieId}`);
-    const castPromise = await movieDB.get<CreditsResponse>(
-      `/${movieId}/credits`,
-    );
+    const movieDetailsPromise = movieDB.get<MovieFull>(`/${movieId}`);
+    const castPromise = movieDB.get<CreditsResponse>(`/${movieId}/credits`);
 
     const [movieDetailResponse, castPromiseResponse] = await Promise.all([
       movieDetailsPromise,

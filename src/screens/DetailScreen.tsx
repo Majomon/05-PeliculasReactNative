@@ -1,18 +1,17 @@
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
 import {
+  ActivityIndicator,
   Dimensions,
   Image,
   ScrollView,
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
 } from 'react-native';
-import {RootStackParams} from '../navigation/Navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {useMovieDetails} from '../hooks/useMovieDetails';
 import MovieDetail from '../components/MovieDetail';
+import {useMovieDetails} from '../hooks/useMovieDetails';
+import {RootStackParams} from '../navigation/Navigation';
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {}
 

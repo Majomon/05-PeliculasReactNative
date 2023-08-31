@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, FlatList} from 'react-native';
+import {Text, View, FlatList, StyleSheet} from 'react-native';
 import {Movie} from '../interface/movieInterface';
 import MoviePoster from './MoviePoster';
 
@@ -7,20 +7,11 @@ interface Props {
   title?: string;
   movies: Movie[];
 }
-const SliderHorizontal = ({title, movies}: Props) => {
+
+export const SliderHorizontal = ({title, movies}: Props) => {
   return (
     <View style={{height: title ? 240 : 220}}>
-      {title && (
-        <Text
-          style={{
-            fontSize: 30,
-            fontWeight: 'bold',
-            marginLeft: 10,
-            color: 'black',
-          }}>
-          {title}
-        </Text>
-      )}
+      {title && <Text style={styles.title}>{title}</Text>}
       <FlatList
         data={movies}
         renderItem={({item}: any) => (
@@ -37,3 +28,12 @@ const SliderHorizontal = ({title, movies}: Props) => {
 };
 
 export default SliderHorizontal;
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    color: 'black',
+  },
+});

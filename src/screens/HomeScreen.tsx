@@ -8,7 +8,7 @@ import {useMovies} from '../hooks/useMovies';
 const {width: windowWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
-  const {moviesInCinema, isLoading, moviesPopular} = useMovies();
+  const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
 
   if (isLoading) {
     return (
@@ -24,15 +24,16 @@ const HomeScreen = () => {
         {/* Carousel principal */}
         <View style={{height: 440}}>
           <Carousel
-            data={moviesInCinema}
+            data={nowPlaying}
             renderItem={({item}: any) => <MoviePoster movie={item} />}
             sliderWidth={windowWidth}
             itemWidth={300}
             inactiveSlideOpacity={0.9}
           />
         </View>
-        <SliderHorizontal title="En cine" movies={moviesInCinema} />
-        <SliderHorizontal title="Populares" movies={moviesPopular} />
+        <SliderHorizontal title="Populares" movies={popular} />
+        <SliderHorizontal title="Más valorados" movies={topRated} />
+        <SliderHorizontal title="Próximamente" movies={upcoming} />
       </View>
     </ScrollView>
   );

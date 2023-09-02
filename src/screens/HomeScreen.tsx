@@ -11,6 +11,11 @@ const {width: windowWidth} = Dimensions.get('window');
 const HomeScreen = () => {
   const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
 
+  const getPosterColors = (index: number) => {
+    const movie = nowPlaying[index];
+    const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+  };
+
   if (isLoading) {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -31,6 +36,7 @@ const HomeScreen = () => {
               sliderWidth={windowWidth}
               itemWidth={300}
               inactiveSlideOpacity={0.9}
+              onSnapToItem={index => getPosterColors(index)}
             />
           </View>
           <SliderHorizontal title="Populares" movies={popular} />

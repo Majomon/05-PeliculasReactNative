@@ -5,15 +5,21 @@ import GradientBackground from '../components/GradientBackground';
 import MoviePoster from '../components/MoviePoster';
 import SliderHorizontal from '../components/SliderHorizontal';
 import {useMovies} from '../hooks/useMovies';
+import {getPalette, type ImageColorsResult} from 'react-native-palette-picker';
+import {getImageColors} from '../helpers/getColors';
 
 const {width: windowWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
   const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
 
-  const getPosterColors = (index: number) => {
+  const getPosterColors = async (index: number) => {
     const movie = nowPlaying[index];
     const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+    const {primary, secondary} = await getImageColors(uri);
+    console.log(primary);
+    console.log(secondary);
   };
 
   if (isLoading) {

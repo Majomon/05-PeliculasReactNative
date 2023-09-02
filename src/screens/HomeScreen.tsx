@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {ActivityIndicator, Dimensions, ScrollView, View} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import GradientBackground from '../components/GradientBackground';
@@ -7,19 +7,21 @@ import SliderHorizontal from '../components/SliderHorizontal';
 import {useMovies} from '../hooks/useMovies';
 import {getPalette, type ImageColorsResult} from 'react-native-palette-picker';
 import {getImageColors} from '../helpers/getColors';
+import {GradientContext} from '../context/GradientContext';
 
 const {width: windowWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
   const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
 
+  const {setMainColors} = useContext(GradientContext);
+
   const getPosterColors = async (index: number) => {
     const movie = nowPlaying[index];
     const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-    const {primary, secondary} = await getImageColors(uri);
-    console.log(primary);
-    console.log(secondary);
+    const {primary , secondary} = await getImageColors(uri);
+    setMainColors({primary, secondary});
   };
 
   if (isLoading) {

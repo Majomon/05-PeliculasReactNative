@@ -1,12 +1,13 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {ActivityIndicator, Dimensions, ScrollView, View} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import GradientBackground from '../components/GradientBackground';
 import MoviePoster from '../components/MoviePoster';
 import SliderHorizontal from '../components/SliderHorizontal';
-import {GradientContext} from '../context/GradientContext';
-import {getImageColors} from '../helpers/getColors';
 import {useMovies} from '../hooks/useMovies';
+import {getPalette, type ImageColorsResult} from 'react-native-palette-picker';
+import {getImageColors} from '../helpers/getColors';
+import {GradientContext} from '../context/GradientContext';
 
 const {width: windowWidth} = Dimensions.get('window');
 
@@ -19,15 +20,9 @@ const HomeScreen = () => {
     const movie = nowPlaying[index];
     const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
-    const {primary, secondary} = await getImageColors(uri);
+    const {primary , secondary} = await getImageColors(uri);
     setMainColors({primary, secondary});
   };
-
-  useEffect(() => {
-    if (nowPlaying.length > 0) {
-      getPosterColors(0);
-    }
-  }, [nowPlaying]);
 
   if (isLoading) {
     return (

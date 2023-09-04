@@ -9,9 +9,9 @@ interface Props {
 }
 
 const GradientBackground = ({children}: Props) => {
-  const {colors, previusColors, setPrevMainColors} =
-    useContext(GradientContext);
-  const {fadeIn, opacity, fadeOut} = useFade();
+  const {colors, prevColors, setPrevMainColors} = useContext(GradientContext);
+
+  const {opacity, fadeIn, fadeOut} = useFade();
 
   useEffect(() => {
     fadeIn(() => {
@@ -23,17 +23,22 @@ const GradientBackground = ({children}: Props) => {
   return (
     <View style={{flex: 1}}>
       <LinearGradient
-        colors={[previusColors.primary, previusColors.secondary, 'white']}
+        colors={[prevColors.primary, prevColors.secondary, 'white']}
         style={{...StyleSheet.absoluteFillObject}}
         start={{x: 0.1, y: 0.1}}
-        end={{x: 0.65, y: 0.65}}
+        end={{x: 0.5, y: 0.7}}
       />
-      <Animated.View style={{...StyleSheet.absoluteFillObject, opacity}}>
+
+      <Animated.View
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          opacity,
+        }}>
         <LinearGradient
           colors={[colors.primary, colors.secondary, 'white']}
           style={{...StyleSheet.absoluteFillObject}}
           start={{x: 0.1, y: 0.1}}
-          end={{x: 0.65, y: 0.65}}
+          end={{x: 0.5, y: 0.7}}
         />
       </Animated.View>
 

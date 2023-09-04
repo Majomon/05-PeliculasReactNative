@@ -7,7 +7,7 @@ interface ImageColors {
 
 interface ContextProps {
   colors: ImageColors;
-  previusColors: ImageColors;
+  prevColors: ImageColors;
   setMainColors: (colors: ImageColors) => void;
   setPrevMainColors: (colors: ImageColors) => void;
 }
@@ -20,7 +20,7 @@ export const GradientProvider = ({children}: any) => {
     secondary: 'transparent',
   });
 
-  const [previusColors, setPreviusColors] = useState<ImageColors>({
+  const [prevColors, setPrevColors] = useState<ImageColors>({
     primary: 'transparent',
     secondary: 'transparent',
   });
@@ -30,11 +30,17 @@ export const GradientProvider = ({children}: any) => {
   };
 
   const setPrevMainColors = (colors: ImageColors) => {
-    setPreviusColors(previusColors);
+    setPrevColors(colors);
   };
+
   return (
     <GradientContext.Provider
-      value={{colors, previusColors, setMainColors, setPrevMainColors}}>
+      value={{
+        colors,
+        prevColors,
+        setMainColors,
+        setPrevMainColors,
+      }}>
       {children}
     </GradientContext.Provider>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import {Animated, Button, StyleSheet, View} from 'react-native';
 import {useFade} from '../hooks/useFade';
 
-const FadeScreen = () => {
+export const FadeScreen = () => {
   const {fadeIn, fadeOut, opacity} = useFade();
 
   return (
@@ -25,16 +25,14 @@ const FadeScreen = () => {
         }}
       />
       <View style={styles.btn}>
-        <Button title="FadeIn" onPress={fadeIn} />
+        <Button title="FadeIn" onPress={() => fadeIn} />
       </View>
       <View style={styles.btn}>
-        <Button title="FadeOut" onPress={fadeOut} />
+        <Button title="FadeOut" onPress={() => fadeOut} />
       </View>
     </View>
   );
 };
-
-export default FadeScreen;
 
 const styles = StyleSheet.create({
   btn: {
